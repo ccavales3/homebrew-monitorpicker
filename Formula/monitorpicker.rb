@@ -7,14 +7,10 @@ class Monitorpicker < Formula
   keg_only "this formula installs configuration files directly to ~/.hammerspoon"
 
   def install
-    puts "Current Dir: #{Dir.pwd}"
-    puts "Dir contents:"
-    puts Dir.entries(".").join("\n")
-
-    # hsp_dir = File.expand_path("~/.hammerspoon")
-    hsp_dir = File.expand_path("~/.hammerspoon/monitorpicker")
+    user_home = ENV["HOME"]
+    hsp_dir = File.join(user_home, ".hammerspoon", "monitorpicker")
     mkdir_p hsp_dir
-    # cp_r "monitorpicker", "#{hsp_dir}/monitorpicker"
+
     cp "init.lua", "#{hsp_dir}/init.lua"
     cp "monitor_picker.lua", "#{hsp_dir}/monitor_picker.lua"
 
