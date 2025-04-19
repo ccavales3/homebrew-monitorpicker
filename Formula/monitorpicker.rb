@@ -2,10 +2,14 @@ class Monitorpicker < Formula
   desc "Lightweight monitor picker for macOS using Hammerspoon"
   homepage "https://github.com/ccavales3/homebrew-monitorpicker"
   url "https://github.com/ccavales3/homebrew-monitorpicker/raw/main/monitorpicker.zip"
-  sha256 "452c23858c707ffbc5c8ea1414ac40b3da84e898bf8e48b11ea30bcd7286c3a9"
+  sha256 "19044ed0fce11b3c33f1820b3eb510766ae9274f83ac12c420c9c0584c853c2e"
   version "1.0.0"
 
   def install
+    puts "Current Dir: #{Dir.pwd}"
+    puts "Dir contents:"
+    puts Dir.entries(".").join("\n")
+
     hsp_dir = File.expand_path("~/.hammerspoon")
     mkdir_p hsp_dir
     cp_r "monitorpicker", "#{hsp_dir}/monitorpicker"
