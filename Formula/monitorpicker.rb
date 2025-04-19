@@ -10,27 +10,32 @@ class Monitorpicker < Formula
   def install
     libexec.install "init.lua"
     libexec.install "monitor_picker.lua"
+    libexec.install "setup.sh"
   end
 
-  def post_install
-    user_home = ENV["HOME"]
-    hsp_dir = File.join(user_home, ".hammerspoon", "monitorpicker")
+  def caveats
+    <<~EOS
+      📦 MonitorPicker config files were installed to:
 
-    puts "🧪 POST INSTALL DEBUG:"
-    puts "  Detected HOME: #{user_home}"
-    puts "  Target dir: #{hsp_dir}"
-    puts "  Files in libexec: #{Dir.children(libexec).join(', ')}"
+          #{libexec}
 
-    begin
-      mkdir_p hsp_dir
-      cp libexec/"init.lua", "#{hsp_dir}/init.lua"
-      cp libexec/"monitor_picker.lua", "#{hsp_dir}/monitor_picker.lua"
-      ohai "✅ MonitorPicker installed to #{hsp_dir}"
-    rescue => e
-      odie "❌ Post-install failed: #{e.message}"
-    end
+      ✅ To finish setup, run this command:
 
-    puts "👉 Add this to your ~/.hammerspoon/init.lua if not already present:"
-    puts "   require(\"monitorpicker\")"
+          /bin/bash -c "$(brew --prefix)/opt/monitorpicker/setup.sh"
+
+      📌 This will copy files to ~/.hammerspoon/monitorpicker and prompt you to update ~/.hammerspoon/init.lua
+
+      Or you can do it manually:
+
+          mkdir -p ~/.hammerspoon/monitorpicker
+          cp #{libexec}/init.lua ~/.hammerspoon/monitorpicker/
+          cp #{libexec}/monitor_picker.lua ~/.hammerspoon/monitorpicker/
+
+      Then add this to your ~/.hammerspoon/init.lua if not already present:
+
+          require("monitorpicker")
+
+      🚀 Reload Hammerspoon and enjoy!
+    EOS
   end
 end
