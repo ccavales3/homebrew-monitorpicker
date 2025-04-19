@@ -21,7 +21,7 @@ class Monitorpicker < Formula
 
       ✅ To finish setup, run this command:
 
-          /bin/bash -c "$(brew --prefix)/opt/monitorpicker/setup.sh"
+          /bin/bash -c "$(brew --prefix)/opt/monitorpicker/libexec/setup.sh"
 
       📌 This will copy files to ~/.hammerspoon/monitorpicker and prompt you to update ~/.hammerspoon/init.lua
 
