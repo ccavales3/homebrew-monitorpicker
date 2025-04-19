@@ -8,22 +8,29 @@ class Monitorpicker < Formula
   keg_only "this formula installs configuration files directly to ~/.hammerspoon"
 
   def install
-    # Save the files inside the Homebrew prefix so they persist through install
-    prefix.install "init.lua"
-    prefix.install "monitor_picker.lua"
+    libexec.install "init.lua"
+    libexec.install "monitor_picker.lua"
   end
 
   def post_install
     user_home = ENV["HOME"]
     hsp_dir = File.join(user_home, ".hammerspoon", "monitorpicker")
-    mkdir_p hsp_dir
 
-    cp prefix/"init.lua", "#{hsp_dir}/init.lua"
-    cp prefix/"monitor_picker.lua", "#{hsp_dir}/monitor_picker.lua"
+    puts "🧪 POST INSTALL DEBUG:"
+    puts "  Detected HOME: #{user_home}"
+    puts "  Target dir: #{hsp_dir}"
+    puts "  Files in libexec: #{Dir.children(libexec).join(', ')}"
 
-    ohai "✅ MonitorPicker installed to #{hsp_dir}"
-    puts  "👉 Add this to your ~/.hammerspoon/init.lua if not already present:"
-    puts  "   require(\"monitorpicker\")"
-    puts  "Then reload Hammerspoon."
+    begin
+      mkdir_p hsp_dir
+      cp libexec/"init.lua", "#{hsp_dir}/init.lua"
+      cp libexec/"monitor_picker.lua", "#{hsp_dir}/monitor_picker.lua"
+      ohai "✅ MonitorPicker installed to #{hsp_dir}"
+    rescue => e
+      odie "❌ Post-install failed: #{e.message}"
+    end
+
+    puts "👉 Add this to your ~/.hammerspoon/init.lua if not already present:"
+    puts "   require(\"monitorpicker\")"
   end
 end
