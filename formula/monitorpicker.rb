@@ -2,7 +2,7 @@ class Monitorpicker < Formula
   desc "Lightweight monitor picker for macOS using Hammerspoon"
   homepage "https://github.com/ccavales3/homebrew-monitorpicker"
   url "https://github.com/ccavales3/homebrew-monitorpicker/raw/main/monitorpicker.zip"
-  sha256 "5870af8dc927edb1a28f0c6315e11dd681b0134dee5e0529056461d2904bb744"
+  sha256 "452c23858c707ffbc5c8ea1414ac40b3da84e898bf8e48b11ea30bcd7286c3a9"
   version "1.0.0"
 
   def install
