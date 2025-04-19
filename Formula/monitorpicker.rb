@@ -10,9 +10,12 @@ class Monitorpicker < Formula
     puts "Dir contents:"
     puts Dir.entries(".").join("\n")
 
-    hsp_dir = File.expand_path("~/.hammerspoon")
+    # hsp_dir = File.expand_path("~/.hammerspoon")
+    hsp_dir = File.expand_path("~/.hammerspoon/monitorpicker")
     mkdir_p hsp_dir
-    cp_r "monitorpicker", "#{hsp_dir}/monitorpicker"
+    # cp_r "monitorpicker", "#{hsp_dir}/monitorpicker"
+    cp "init.lua", "#{hsp_dir}/init.lua"
+    cp "monitor_picker.lua", "#{hsp_dir}/monitor_picker.lua"
 
     ohai "✅ MonitorPicker installed to ~/.hammerspoon/monitorpicker"
     puts  "👉 Add the following line to your ~/.hammerspoon/init.lua if you haven't already:"
